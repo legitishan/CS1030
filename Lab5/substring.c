@@ -1,19 +1,32 @@
 #include<stdio.h>
 void main()
 {
-    char str[100];
-    printf("Enter a string: ");
-    fgets(str, sizeof(str), stdin);
-    int pos, len;
-    printf("Enter position and length of substring: ");
-    scanf("%d%d", &pos, &len);
-    char sub[100];
-    int i = 0;
-    while(i<len)
+    char str[80], search[10];
+    int count1 = 0, count2 = 0, i, j, count;
+    printf("Enter a string:");
+    gets(str);
+    printf("Enter search substring:");
+    gets(search);
+    while (str[count1] != '\0')
+        count1++;
+    while (search[count2] != '\0')
+        count2++;
+    for (i = 0; i <= count1 - count2; i++)
     {
-        sub[i] = str[pos+i-1];
-        i++;
+        for (j = i; j < i + count2; j++)
+        {
+            count = 1;
+            if (str[j] != search[j - i])
+            {
+                count = 0;
+                break;
+            }
+        }
+        if (count == 1)
+            break;
     }
-    sub[i] = '\0';
-    printf("substring: %s", sub);
+    if (count == 1)
+        printf("Present!");
+    else
+        printf("Not Present");
 }
